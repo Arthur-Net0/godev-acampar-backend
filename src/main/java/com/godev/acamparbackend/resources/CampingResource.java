@@ -47,7 +47,7 @@ public class CampingResource {
 
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Void> update(@Valid @RequestBody CampingDTO objDto, @PathVariable Integer id) {
+	public ResponseEntity<Void> update(@RequestBody CampingDTO objDto, @PathVariable Integer id) {
 		Camping obj = new Camping(objDto);
 		obj.setId(id);
 		obj = service.update(obj);
