@@ -94,4 +94,13 @@ public class CampingResource {
 		
 		return ResponseEntity.ok().body(campingsDto);
 	}
+	
+	
+	@RequestMapping(value = "/testeRepository", method = RequestMethod.GET)
+	public ResponseEntity<List<CampingDTO>> testeRepository() {
+		List<Camping> campings = service.serviceTestRepository();
+		List<CampingDTO> campingsDto = campings.stream().map(camping -> new CampingDTO(camping))
+				.collect(Collectors.toList());
+		return ResponseEntity.ok().body(campingsDto);
+	}
 }

@@ -1,5 +1,6 @@
 package com.godev.acamparbackend.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -75,6 +76,10 @@ public class CampingService {
 		List<Regra> regras = campingRegras.stream().map(x -> x.getRegra()).collect(Collectors.toList());
 
 		return repository.search(regras, pageRequest);
+	}
+	
+	public List<Camping> serviceTestRepository() {
+		return repository.findByOrderByNome();	
 	}
 
 }
