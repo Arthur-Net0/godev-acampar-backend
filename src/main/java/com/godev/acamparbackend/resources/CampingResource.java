@@ -47,7 +47,7 @@ public class CampingResource {
 
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Void> update(@Valid @RequestBody CampingDTO objDto, @PathVariable Integer id) {
+	public ResponseEntity<Void> update(@RequestBody CampingDTO objDto, @PathVariable Integer id) {
 		Camping obj = new Camping(objDto);
 		obj.setId(id);
 		obj = service.update(obj);
@@ -92,6 +92,15 @@ public class CampingResource {
 		Page<Camping> campings = service.search(ids, page, linesPerPage, orderBy, direction);
 		Page<CampingDTO> campingsDto = campings.map(camping -> new CampingDTO(camping));
 		
+		return ResponseEntity.ok().body(campingsDto);
+	}
+	
+	
+	@RequestMapping(value = "/testeRepository", method = RequestMethod.GET)
+	public ResponseEntity<List<CampingDTO>> testeRepository() {
+		List<Camping> campings = service.serviceTestRepository();
+		List<CampingDTO> campingsDto = campings.stream().map(camping -> new CampingDTO(camping))
+				.collect(Collectors.toList());
 		return ResponseEntity.ok().body(campingsDto);
 	}
 }
